@@ -1,14 +1,17 @@
 #include <iostream>
+#include <random>
 #include <xlnt/xlnt.hpp>
+#include <unistd.h>
+#include <fstream>
+#include <Utility.h>
+
+
 int main() {
-    // Check if xlnt is working
-    xlnt::workbook wb;
-    xlnt::worksheet ws = wb.active_sheet();
-    ws.cell("A1").value(5);
-    ws.cell("B2").value("string data");
-    ws.cell("C3").formula("=RAND()");
-    ws.merge_cells("C3:C4");
-    ws.freeze_panes("B2");
-    wb.save("example.xlsx");
-    return 0;
+
+
+    std::string path = Utility::getCurrentDirectory()+ "/example.xlsx";
+
+    // Generate the excel file if it doesn't exist
+    if(!Utility::exists(path))
+        Utility::generate(path,10000);
 }
