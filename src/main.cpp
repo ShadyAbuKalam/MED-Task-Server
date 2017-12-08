@@ -1,13 +1,14 @@
 #include <iostream>
 #include <Utility.h>
 #include <QtGui>
+#include <ExcelServer.h>
 
 int main(int argc, char *argv[]) {
     QCoreApplication app(argc, argv);
 
     QTextStream out(stdout);
 
-    QString path = QDir::currentPath().append(QDir::separator()).append("/example.xlsx");
+    QString path = QDir::currentPath().append(QDir::separator()).append("example.xlsx");
     out << QString("Excel file : %1").arg(path) << endl;
     // Generate the excel file if it doesn't exist
     if (!QFileInfo(path).exists()) {
@@ -17,6 +18,8 @@ int main(int argc, char *argv[]) {
     } else
         out << "File found "<<endl;
 
+    ExcelServer server(path);
+    server.startServer();
     return app.exec();
 
 }
