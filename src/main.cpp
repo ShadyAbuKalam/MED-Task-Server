@@ -1,17 +1,23 @@
 #include <iostream>
-#include <random>
-#include <xlnt/xlnt.hpp>
-#include <unistd.h>
-#include <fstream>
 #include <Utility.h>
+#include <QtGui>
 
+int main(int argc, char *argv[]) {
+    QCoreApplication app(argc, argv);
 
-int main() {
+    QTextStream out(stdout);
 
-
-    std::string path = Utility::getCurrentDirectory()+ "/example.xlsx";
-
+    QString path = QDir::currentPath().append(QDir::separator()).append("/example.xlsx");
+    out << QString("Excel file : %1").arg(path) << endl;
     // Generate the excel file if it doesn't exist
-    if(!Utility::exists(path))
-        Utility::generate(path,10000);
+    if (!QFileInfo(path).exists()) {
+        out << "File not found ! Generating 10K records excel sheet" << endl;
+
+        Utility::generate(path, 10000);
+    } else
+        out << "File found "<<endl;
+
+    return app.exec();
+
 }
+

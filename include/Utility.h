@@ -7,11 +7,10 @@
 
 #define SECONDS_PER_YEAR 360*24*60*60
 
+#include <QString>
 class Utility {
 public:
-    static void generate(std::string path,long long samples_count);
-    static bool exists(std::string  name );
-    static std::string getCurrentDirectory();
+    static void generate(QString path,long long samples_count);
 };
 
 

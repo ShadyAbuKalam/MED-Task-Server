@@ -12,10 +12,14 @@ set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR})
 #include header files from include
 include_directories(include)
 
+
 #add .cpp files in src to executable
 file(GLOB SOURCES "src/*.cpp")
 
 find_library(XLNT_LIBRARY NAMES xlnt  XLNT HINTS "/usr/lib/" "/usr/local/lib/")
 
+#Adding QT4 support here
+find_package(Qt4 4.8 REQUIRED QtCore QtNetwork QtGui )
+
 add_executable(Server ${SOURCES})
-target_link_libraries(Server ${XLNT_LIBRARY})
+target_link_libraries(Server ${XLNT_LIBRARY} Qt4::QtCore Qt4::QtNetwork Qt4::QtGui)

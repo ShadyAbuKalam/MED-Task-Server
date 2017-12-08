@@ -4,18 +4,11 @@
 #include <string>
 #include <fstream>
 #include <xlnt/xlnt.hpp>
-#include <unistd.h>
-#include <vector>
 #include "Utility.h"
 
-bool Utility::exists(std::string name) {
 
-    std::ifstream f (name);
-    return f.good();
 
-}
-
-void Utility::generate(std::string path, long long samples_count) {
+void Utility::generate(QString path, long long samples_count) {
 
     xlnt::workbook wb;
     wb.create_sheet();
@@ -32,15 +25,6 @@ void Utility::generate(std::string path, long long samples_count) {
 
     }
 
-    wb.save(path);
+    wb.save(path.toStdString());
 }
 
-std::string Utility::getCurrentDirectory() {
-
-    // Get working directory
-    char c_path[255];
-    getcwd(c_path,255);
-
-
-   return std::string (c_path);
-}
