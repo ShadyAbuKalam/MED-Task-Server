@@ -2,10 +2,10 @@
 #include <Utility.h>
 #include <QtGui>
 #include <ExcelServer.h>
+#include <SynchronousExcelWrapper.h>
 
 int main(int argc, char *argv[]) {
     QCoreApplication app(argc, argv);
-
     QTextStream out(stdout);
 
     QString path = QDir::currentPath().append(QDir::separator()).append("example.xlsx");

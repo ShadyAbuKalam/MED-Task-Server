@@ -12,7 +12,7 @@ class ExcelThread : public QThread {
 Q_OBJECT
 
 public:
-    ExcelThread(int socketDescriptor, xlnt::workbook *wb, QMutex *shared_lock, QObject *parent = 0);
+    ExcelThread(int socketDescriptor, QObject *parent = 0);
 
     void run() override;
 
@@ -29,8 +29,7 @@ public slots:
 private:
     QTcpSocket *socket;
     int socketdescriptor;
-    QMutex *shared_lock;
-    xlnt::workbook *work_book;
+    SynchronousExcelWrapper *synchronousWrapper;
 };
 
 

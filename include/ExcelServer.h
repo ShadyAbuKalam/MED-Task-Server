@@ -8,15 +8,15 @@
 #include <xlnt/xlnt.hpp>
 #include <QTcpServer>
 #include <QMutex>
+#include "SynchronousExcelWrapper.h"
 
 class ExcelServer : public QTcpServer {
 
 Q_OBJECT
 
 private:
-    xlnt::workbook wb;
-    QMutex mMutex;
-    QString path;
+
+    SynchronousExcelWrapper *excelwrapper;
     QTcpServer *qTcpServer;
 public:
     explicit ExcelServer(QString path, QObject *parent = 0);

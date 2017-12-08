@@ -6,8 +6,8 @@
 #include <ExcelThread.h>
 
 ExcelServer::ExcelServer(QString path, QObject *parent) : QTcpServer(parent) {
-    this->path = path;
-    this->wb.load(this->path.toStdString());
+    excelwrapper = SynchronousExcelWrapper::getInstance();
+    excelwrapper->load(path);
 
 }
 
@@ -25,7 +25,7 @@ void ExcelServer::incomingConnection(int socketdescriptor) {
 
     QTextStream out(stdout);
     out << "Client connected" << endl;
-    ExcelThread *t = new ExcelThread(socketdescriptor, &this->wb, &this->mMutex, this);
+    ExcelThread *t = new ExcelThread(socketdescriptor, this);
 
     t->start();
 
