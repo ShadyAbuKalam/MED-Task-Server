@@ -19,6 +19,8 @@ public:
 
     long long getStamp(unsigned int row_no);
 
+    xlnt::row_t getHighestRow();
+
 private:
     xlnt::workbook wb;
     QMutex mMutex;

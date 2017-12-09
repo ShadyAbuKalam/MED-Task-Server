@@ -24,6 +24,11 @@ float SynchronousExcelWrapper::getValue(unsigned int row_no) {
     return x;
 }
 
+xlnt::row_t SynchronousExcelWrapper::getHighestRow() {
+
+    return this->wb.active_sheet().highest_row();
+}
+
 SynchronousExcelWrapper *SynchronousExcelWrapper::instance = nullptr;
 
 long long SynchronousExcelWrapper::getStamp(unsigned int row_no) {
