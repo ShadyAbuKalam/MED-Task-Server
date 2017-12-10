@@ -2,19 +2,21 @@
 #include <Utility.h>
 #include <QtGui>
 #include <ExcelServer.h>
-#include <SynchronousExcelWrapper.h>
+
+#define EXCEL_FILE_NAME "example.xlsx"
+#define TO_BE_GENERATED_RECORDS 10000
 
 int main(int argc, char *argv[]) {
     QCoreApplication app(argc, argv);
     QTextStream out(stdout);
 
-    QString path = QDir::currentPath().append(QDir::separator()).append("example.xlsx");
+    QString path = QDir::currentPath().append(QDir::separator()).append(EXCEL_FILE_NAME);
     out << QString("Excel file : %1").arg(path) << endl;
     // Generate the excel file if it doesn't exist
     if (!QFileInfo(path).exists()) {
-        out << "File not found ! Generating 10K records excel sheet" << endl;
+        out << QString("File not found ! Generating %1 records excel sheet").arg(TO_BE_GENERATED_RECORDS) << endl;
 
-        Utility::generate(path, 10000);
+        Utility::generate(path, TO_BE_GENERATED_RECORDS);
     } else
         out << "File found "<<endl;
 

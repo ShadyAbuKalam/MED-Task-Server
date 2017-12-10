@@ -5,6 +5,8 @@
 #include "ExcelServer.h"
 #include <ExcelThread.h>
 
+#define PORT 1234
+
 ExcelServer::ExcelServer(QString path, QObject *parent) : QTcpServer(parent) {
     excelwrapper = SynchronousExcelWrapper::getInstance();
     excelwrapper->load(path);
@@ -14,7 +16,7 @@ ExcelServer::ExcelServer(QString path, QObject *parent) : QTcpServer(parent) {
 void ExcelServer::startServer() {
     QTextStream out(stdout);
 
-    if (!this->listen(QHostAddress::Any, 1234)) {
+    if (!this->listen(QHostAddress::Any, PORT)) {
         out << QString("Unable to start server : %1").arg(this->qTcpServer->errorString()) << endl;
     } else {
         out << "Listening..." << endl;
